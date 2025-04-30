@@ -9,18 +9,28 @@ const PORT = process.env.PORT || 3000;
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:5002',
-    'https://aiko-agency.fr',
-    'https://www.aiko-agency.fr'
-  ],
-  credentials: true,
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// Configuration CORS plus permissive en production pour résoudre les problèmes d'accès
+if (isProduction) {
+  // En production, accepter toutes les origines
+  app.use(cors());
+  console.log('Mode production: CORS configuré pour accepter toutes les origines');
+} else {
+  // En développement, limiter aux origines spécifiques
+  app.use(cors({
+    origin: [
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'http://localhost:5002',
+      'https://aiko-agency.fr',
+      'https://www.aiko-agency.fr'
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+  console.log('Mode développement: CORS limité aux origines spécifiques');
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
