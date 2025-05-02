@@ -161,7 +161,7 @@ app.post('/api/contact', async (req, res) => {
         <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="text-align: center; margin-bottom: 20px;">
-              <img src="${process.env.SERVER_URL || `http://localhost:${PORT}`}/aiko.svg" alt="Aiko Logo" style="max-width: 150px; height: auto;">
+                <img src="${isProduction ? 'https://server-aiko.onrender.com' : `http://localhost:${PORT}`}/aiko.svg" alt="Aiko Logo" style="max-width: 150px; height: auto;">
             </div>
             <div style="padding: 20px; background-color: #ffffff;">
               <h2 style="color: #333333; margin-bottom: 20px; text-align: center;">Merci pour votre demande !</h2>
