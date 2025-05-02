@@ -149,13 +149,34 @@ app.post('/api/contact', async (req, res) => {
       from: process.env.FROM_EMAIL,
       subject: 'Confirmation de votre demande - Aiko',
       html: `
-        <h2>Merci pour votre demande !</h2>
-        <p>Bonjour,</p>
-        <p>Nous avons bien reçu votre demande concernant "${service}". Notre équipe va l'examiner et vous répondra dans les plus brefs délais.</p>
-        <p>Voici un récapitulatif de votre message :</p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-        <p>À bientôt,</p>
-        <p>L'équipe Aiko</p>
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
+          <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <div style="text-align: center; margin-bottom: 20px;">
+              <img src="https://aiko-development.fr/logo.png" alt="Aiko Logo" style="max-width: 150px; height: auto;">
+            </div>
+            <div style="padding: 20px; background-color: #ffffff;">
+              <h2 style="color: #333333; margin-bottom: 20px; text-align: center;">Merci pour votre demande !</h2>
+              <p style="color: #666666; margin-bottom: 15px;">Bonjour,</p>
+              <p style="color: #666666; margin-bottom: 15px;">Nous avons bien reçu votre demande concernant <strong style="color: #333333;">"${service}"</strong>. Notre équipe va l'examiner et vous répondra dans les plus brefs délais.</p>
+              <div style="background-color: #f8f8f8; padding: 15px; border-radius: 4px; margin: 20px 0;">
+                <h3 style="color: #333333; margin-bottom: 10px;">Récapitulatif de votre message :</h3>
+                <p style="color: #666666; margin: 0;">${message.replace(/\n/g, '<br>')}</p>
+              </div>
+              <p style="color: #666666; margin-bottom: 15px;">À bientôt,</p>
+              <p style="color: #666666; margin-bottom: 15px; font-weight: bold;">L'équipe Aiko</p>
+            </div>
+            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eeeeee;">
+              <p style="color: #999999; font-size: 12px;">${new Date().getFullYear()} Aiko. Tous droits réservés.</p>
+            </div>
+          </div>
+        </body>
+        </html>
       `
     };
     
