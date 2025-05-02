@@ -7,6 +7,9 @@ const sgMail = require('@sendgrid/mail');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Servir les fichiers statiques
+app.use(express.static(__dirname));
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 // Configuration CORS plus permissive en production pour résoudre les problèmes d'accès
@@ -158,7 +161,7 @@ app.post('/api/contact', async (req, res) => {
         <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
             <div style="text-align: center; margin-bottom: 20px;">
-              <img src="https://aiko-development.fr/logo.png" alt="Aiko Logo" style="max-width: 150px; height: auto;">
+              <img src="${process.env.SERVER_URL || `http://localhost:${PORT}`}/aiko.svg" alt="Aiko Logo" style="max-width: 150px; height: auto;">
             </div>
             <div style="padding: 20px; background-color: #ffffff;">
               <h2 style="color: #333333; margin-bottom: 20px; text-align: center;">Merci pour votre demande !</h2>
@@ -166,7 +169,6 @@ app.post('/api/contact', async (req, res) => {
               <p style="color: #666666; margin-bottom: 15px;">Nous avons bien reçu votre demande concernant <strong style="color: #333333;">"${service}"</strong>. Notre équipe va l'examiner et vous répondra dans les plus brefs délais.</p>
               <div style="background-color: #f8f8f8; padding: 15px; border-radius: 4px; margin: 20px 0;">
                 <h3 style="color: #333333; margin-bottom: 10px;">Récapitulatif de votre message :</h3>
-                <p style="color: #666666; margin: 0;">${message.replace(/\n/g, '<br>')}</p>
               </div>
               <p style="color: #666666; margin-bottom: 15px;">À bientôt,</p>
               <p style="color: #666666; margin-bottom: 15px; font-weight: bold;">L'équipe Aiko</p>
