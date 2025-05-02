@@ -13,7 +13,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 if (isProduction) {
   // En production, accepter toutes les origines
   app.use(cors());
-  console.log('Mode production: CORS configuré pour accepter toutes les origines');
+  console.log('Modes production: CORS configuré pour accepter toutes les origines');
 } else {
   // En développement, limiter aux origines spécifiques
   app.use(cors({
